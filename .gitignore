@@ -1,0 +1,20 @@
+# Default ignored files
+.DS_Store
+/target/
+/out/
+/build/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+bin/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
