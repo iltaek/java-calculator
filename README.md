@@ -24,3 +24,5 @@
 ## 참고할 문서
 * [기능 구현과 JUnit, AssertJ 구현 힌트](./Hints.md)
 * [코드 리뷰 프로세스](./CodeReviewProcess.md)
+* [Google Code Convention](https://google.github.io/styleguide/javaguide.html) 문서
+  * [Google Code Style Guide](https://github.com/google/styleguide) 에서 `intellij-java-google-style.xml` 받을 수 있음.
