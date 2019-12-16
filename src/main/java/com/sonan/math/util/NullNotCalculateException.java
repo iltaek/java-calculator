@@ -1,4 +1,4 @@
-package com.sonan.util;
+package com.sonan.math.util;
 
 /**
  * @github: http://github.com/sonanDev
@@ -22,10 +22,5 @@ public class NullNotCalculateException extends RuntimeException {
 
   public NullNotCalculateException(Throwable cause) {
     super(cause);
-  }
-
-  protected NullNotCalculateException(String message, Throwable cause, boolean enableSuppression,
-      boolean writableStackTrace) {
-    super(message, cause, enableSuppression, writableStackTrace);
   }
 }
