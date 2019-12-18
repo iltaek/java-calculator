@@ -21,7 +21,6 @@ public class Calculator {
             .filter(o -> !Operator.findByName(o).isPresent())
             .map(Double::parseDouble)
             .reduce((a, b) -> Objects.requireNonNull(operators.poll()).method.apply(a, b))
-            .orElseThrow(IllegalArgumentException::new);
+            .orElseThrow(() -> new IllegalArgumentException("계산에 실패했습니다."));
     }
-
 }
