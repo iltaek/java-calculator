@@ -40,9 +40,14 @@ ex) git push origin step1
 * 원격 저장소에 merge된 브랜치를 삭제한다. (사실, 해도 되고 안해도 된다.) 
 ```bash
 git checkout 본인_아이디
+// local에 있는 브랜치는 아래 커맨드를 통해 삭제됨.
 git branch -D 삭제할_브랜치이름
+// remote에 있는 브랜치는 아래 커맨드를 통해 삭제됨.
+git push origin :삭제할_브랜치이름
+
 ex) git checkout iltaek
 ex) git branch -D step1
+ex) git push origin :step1
 ```
 * merge된 원격 저장소의 자신 브랜치와 로컬 저장소(본인의 컴퓨터)를 동기화하기 위해 remote 저장소를 추가한다.(최초 한번만)
 ```bash
