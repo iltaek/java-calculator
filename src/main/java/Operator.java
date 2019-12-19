@@ -1,6 +1,10 @@
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
+import java.util.Queue;
 import java.util.function.BinaryOperator;
+import java.util.stream.Collectors;
 
 public enum Operator {
     ADD("+", Double::sum),
@@ -20,5 +24,14 @@ public enum Operator {
         return Arrays.stream(Operator.values())
             .filter(v -> v.name.equals(name))
             .findFirst();
+    }
+
+    static Queue<Operator> findOperators(List<String> arguments) {
+        return arguments
+            .stream()
+            .map(Operator::findByName)
+            .filter(Optional::isPresent)
+            .map(Optional::get)
+            .collect(Collectors.toCollection(LinkedList::new));
     }
 }
