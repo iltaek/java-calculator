@@ -1,4 +1,6 @@
-
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.Optional;
 
 public class Calculator {
     public static void main(String[] args) {
@@ -6,31 +8,13 @@ public class Calculator {
     }
 
     public double run(String input) {
-        if (input == null) {
-            throw new IllegalArgumentException("Blank input error");
-        }
-
-        String[] elements = input.split(" ");
+        String[] elements = Optional.ofNullable(input)
+                .orElseThrow(() -> new IllegalArgumentException("Blank input error."))
+                .split(" ");
 
         checkValidation(elements);
 
-        double result = parseStringToDouble(elements[0]);
-
-        for (int i = 1; i < elements.length; i = i + 2) {
-            if (elements[i].equals("+")) {
-                result += parseStringToDouble(elements[i + 1]);
-            } else if (elements[i].equals("-")) {
-                result -= parseStringToDouble(elements[i + 1]);
-            } else if (elements[i].equals("*")) {
-                result *= parseStringToDouble(elements[i + 1]);
-            } else if (elements[i].equals("/")) {
-                result /= parseStringToDouble(elements[i + 1]);
-            } else {
-                throw new IllegalArgumentException("Operation format error");
-            }
-        }
-
-        return result;
+        return calculate(elements);
     }
 
     private void checkValidation(String[] elements) {
@@ -43,11 +27,26 @@ public class Calculator {
         }
     }
 
-    public double parseStringToDouble(String element) {
+    private double calculate(String[] elements) {
+        Iterator<String> iterator = Arrays.asList(elements)
+                .iterator();
+        double result = parseStringToDouble(iterator.next());
+
+        while (iterator.hasNext()) {
+            String arithmeticOperator = iterator.next();
+            double addend = parseStringToDouble(iterator.next());
+
+            result = ArithmeticOperator.operate(result, arithmeticOperator, addend);
+        }
+
+        return result;
+    }
+
+    private double parseStringToDouble(String element) {
         try {
             return Double.parseDouble(element);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Number format error");
+            throw new IllegalArgumentException("Number format error.");
         }
     }
 }
