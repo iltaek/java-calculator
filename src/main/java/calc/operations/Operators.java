@@ -8,14 +8,16 @@ public enum Operators {
     MULTIPLY("*", new Multiplication()),
     DIVIDE("/", new Division());
 
-    private String operator;
-    private Operation operation;
-    private static final HashMap<String, Operators> OP_LABEL = new HashMap<>();;
+    private static final HashMap<String, Operators> OP_LABEL = new HashMap<>();
 
     static {
-        for (Operators op : values())
+        for (Operators op : values()) {
             OP_LABEL.put(op.toString(), op);
+        }
     }
+
+    private String operator;
+    private Operation operation;
 
     Operators(String operator, Operation operation) {
         this.operator = operator;
