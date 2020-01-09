@@ -1,23 +1,22 @@
 import java.util.Arrays;
 import java.util.function.Function;
-import java.util.stream.Stream;
 
 public enum ArithmeticOperator {
     PLUS("+" :: equals,
-            stream -> stream.reduce((x, y) -> x + y).get()),
+            (augend, addend) -> augend + addend),
     MINUS("-" :: equals,
-            stream -> stream.reduce((x, y) -> x - y).get()),
+            (augend, addend) -> augend - addend),
     MULTIPLY("*" :: equals,
-            stream -> stream.reduce((x, y) -> x * y).get()),
+            (augend, addend) -> augend * addend),
     DIVIDE("/" :: equals,
-            stream -> stream.reduce((x, y) -> x / y).get());
+        (augend, addend) -> augend / addend);
 
     Function<String, Boolean> operationIdentifier;
-    Function<Stream<Double>, Double> arithmeticOperation;
+    Operation operation;
 
-    ArithmeticOperator(Function<String, Boolean> operationIdentifier, Function<Stream<Double>, Double> arithmeticOperation) {
+    ArithmeticOperator(Function<String, Boolean> operationIdentifier, Operation operation) {
         this.operationIdentifier = operationIdentifier;
-        this.arithmeticOperation = arithmeticOperation;
+        this.operation = operation;
     }
 
     public static double operate(double augend, String arithmeticOperator, double addend) {
@@ -34,6 +33,10 @@ public enum ArithmeticOperator {
     }
 
     public double getOperationResult(double augend, double addend) {
-        return arithmeticOperation.apply(Stream.of(augend, addend));
+        return operation.calculate(augend, addend);
+    }
+
+    public interface Operation {
+        double calculate(double augend, double addend);
     }
 }
